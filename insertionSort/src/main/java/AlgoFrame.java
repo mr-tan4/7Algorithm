@@ -27,10 +27,10 @@ public class AlgoFrame extends JFrame {
         return canvasHeight;
     }
 
-    private int[] money;
+    private InsertionSortData data;
 
-    public void render(int[] money) {
-        this.money = money;
+    public void render(InsertionSortData data) {
+        this.data = data;
         repaint();
     }
 
@@ -44,9 +44,23 @@ public class AlgoFrame extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
+
             RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.addRenderingHints(hints);
+
+            int w = canvasWidth / data.N();
+            for (int i = 0; i < data.N(); i++) {
+                if (i < data.orderedIndex) {
+                    AlgoVisHelper.setColor(g2d, Color.RED);
+                } else {
+                    AlgoVisHelper.setColor(g2d, Color.GRAY);
+                }
+                if (i == data.currentIndex) {
+                    AlgoVisHelper.setColor(g2d, Color.ORANGE);
+                }
+                AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
+            }
         }
 
         @Override

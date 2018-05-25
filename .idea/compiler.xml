@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="insertionSort" />
+        <module name="modle" />
+        <module name="monteCarloPi" />
+        <module name="selectionSort" />
+        <module name="treeGates" />
+        <module name="winnprize" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="insertionSort" target="8" />
+      <module name="modle" target="8" />
+      <module name="monteCarloPi" target="8" />
+      <module name="selectionSort" target="8" />
+      <module name="treeGates" target="8" />
+      <module name="winnprize" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

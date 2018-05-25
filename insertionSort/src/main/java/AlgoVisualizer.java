@@ -7,18 +7,15 @@ import java.awt.event.MouseEvent;
 public class AlgoVisualizer {
 
     private static final int DELAY = 40;
-    private int[] money;
+    private InsertionSortData data;
     private AlgoFrame frame;
     private boolean isAnimated = true;
 
-    public AlgoVisualizer(int sceneWidth, int sceneHeight) {
-        money = new int[100];
-        for (int i = 0; i < money.length; i++) {
-            money[i] = 100;
-        }
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N) {
 
+        data = new InsertionSortData(N, sceneHeight);
         EventQueue.invokeLater(() -> {
-            frame = new AlgoFrame("Circle", sceneWidth, sceneHeight);
+            frame = new AlgoFrame("Insertion Sort Visualization", sceneWidth, sceneHeight);
 //            frame.addKeyListener(new AlgoKeyListener());
 //            frame.addMouseListener(new AlgoMouseListener());
             new Thread(() -> {
@@ -28,6 +25,23 @@ public class AlgoVisualizer {
     }
 
     private void run() {
+        setData(0, -1);
+        for (int i = 0; i < data.N(); i++) {
+            setData(i, i);
+            for (int j = i; j > 0 && data.get(j) < data.get(j - 1); j--) {
+                data.swap(j, j - 1);
+                setData(i + 1, j - 1);
+            }
+        }
+        setData(data.N(), -1);
+    }
+
+    private void setData(int orderedIndex, int currentIndex) {
+        data.orderedIndex = orderedIndex;
+        data.currentIndex = currentIndex;
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     private class AlgoKeyListener extends KeyAdapter {
@@ -49,9 +63,9 @@ public class AlgoVisualizer {
 
 
     public static void main(String[] args) {
-        int sceneWidth = 1000;
+        int sceneWidth = 800;
         int sceneHeight = 800;
-        int N = 50;
-        AlgoVisualizer algoVisualizer = new AlgoVisualizer(sceneWidth, sceneHeight);
+        int N = 100;
+        AlgoVisualizer algoVisualizer = new AlgoVisualizer(sceneWidth, sceneHeight,N);
     }
 }
